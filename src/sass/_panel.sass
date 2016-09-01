@@ -1,0 +1,36 @@
+﻿.panel
+  border: 0
+
+  .panel-body
+    position: relative
+
+  &.panel-open
+    .plus
+      display: none
+
+  &.panel-default>.panel-heading
+    background-color: $color-default
+    border: 0
+    text-transform: uppercase
+    border-radius: 0
+    -webkit-border-radius: 0
+    -moz-border-radius: 0
+
+    a
+      color: #fff
+      display: block
+      outline: none
+      text-decoration: none
+
+      .plus
+        float: right
+
+      &.collapsed
+        .plus
+          display: block
+
+  &.accordion-disabled>.panel-heading
+    background-color: $color-disabled
+
+    .text-muted
+      color: #fff

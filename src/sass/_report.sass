@@ -1,0 +1,121 @@
+﻿.container__report
+  font-size: 13px
+  margin: 35px 0 60px 0
+
+  .title--order
+    border-bottom: 1px solid $color-disabled
+    margin-bottom: 20px
+    padding-bottom: 20px
+
+  .form__orders--seller
+    margin-bottom: 20px
+
+    .col-sm-2
+      padding-right: 0;
+      width: 20%
+
+      &:last-child
+        padding-right: 15px
+
+    input.form-control
+      font-size: 12px
+      padding-bottom: 6px
+      padding-top: 6px
+
+    select.form-control
+      font-size: 12px
+      height: 34px
+
+    .form__button
+      margin-top: 24px
+
+  .list__orders--header
+    margin: 0
+    padding: 10px 0
+    text-transform: uppercase
+    box-shadow: 0 1px 3px 0 rgba(#000, .4)
+    border-radius: 4px
+
+    div:nth-child(2)
+      white-space: nowrap
+
+  .list__orders--seller
+    color: $color-default
+    max-height: 600px;
+    overflow: auto;
+
+    li
+      font-size: 12px
+      overflow: hidden
+      padding-bottom: 5px
+      padding-top: 5px
+      text-align: center
+
+      div
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        -ms-word-break: break-all;
+        word-break: break-all;
+        word-break: break-word;
+        -ms-hyphens: none;
+        -moz-hyphens: none;
+        -webkit-hyphens: none;
+        hyphens: none;
+
+        strong
+          font-size: 13px
+          white-space: nowrap;
+
+        &:first-child
+          padding-left: 10px
+
+      &.list__orders--item
+        border-left: 5px solid $color-default
+        text-align: left
+
+      &.status--Cancelado
+        border-left-color: #c00
+
+      &.status--Aprovado
+        border-left-color: #0c0
+
+.container__comissions
+  background-color: #4a4a4a
+  bottom: 0
+  color: #fff
+  padding: 10px 0;
+  position: fixed
+  width: 100%
+
+  .container__comissions--col
+    display: flex;
+    justify-content: flex-end
+
+    p
+      border-right: 1px solid #909090
+      font-family: $font-regular
+      line-height: 16px
+      margin-bottom: 0
+      margin-right: 10px
+      padding-right: 10px
+
+      strong
+        color: #fff
+        display: block
+        font-size: 13px
+        font-weight: normal
+        text-transform: uppercase
+
+      span
+        color: #a5a1a1
+        font-size: 0.75em
+
+    h2
+      font-size: 23px
+      font-weight: bold
+      line-height: 30px;
+      margin: 0
+
+.item-list__nenhum-resultado
+  margin-bottom: 20px
+  text-align: center

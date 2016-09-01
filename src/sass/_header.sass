@@ -1,0 +1,90 @@
+﻿.navbar
+  left: 0
+  margin-bottom: 0
+  position: fixed
+  top: 0
+  width: 100%
+
+.navbar-default, .navbar-default .navbar-toggle, .navbar-default .navbar-toggle:hover
+  background-color: $color-default
+  border: 0
+  border-radius: 0
+  margin-left: 0
+  padding-left: 0
+
+.navbar-brand
+  background: url(../img/logo-claro.svg) no-repeat center left
+  box-sizing: border-box
+  height: 50px
+  padding: 0
+  width: 75px
+
+  &.headerUnlogged
+    background-position: center
+    display: block
+    float: none
+    margin: 8px auto
+
+  span
+    display: none
+
+.navbar-header
+  box-sizing: border-box
+  float: none
+
+.navbar-toggle
+  display: block
+  float: left
+  margin-right: 5px
+
+.navbar-toggle .icon-bar
+  height: 4px
+
+.navbar-collapse.collapse
+  display: none!important
+
+.navbar-collapse.collapse.in
+  display:block !important
+
+.navbar-nav
+  float: none
+
+.navbar-nav>li
+  float: none
+
+.navbar-default .navbar-toggle .icon-bar
+  background-color: #fff
+
+.navbar-default .navbar-nav>li>a
+  color: #fff
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover
+  font-weight: 700
+  color: $color-default
+  background-color: #fff
+
+.navbar-btn__seller
+  background: url('../img/ico-vendedor.svg') no-repeat left center
+  background-size: 30px
+  box-sizing: border-box
+  display: block
+  height: 38px
+  margin: 8px 15px
+  padding-left: 35px
+  width: auto
+  &, &:active, &:hover, &:visited, &:link
+    text-decoration: none
+
+.seller__name
+  font-family:  $font-bold
+  font-size: 1em
+  color: #fff
+  position: relative
+  top: 18px
+
+  &:before
+    content: 'Vendedor'
+    font-family:  $font-regular
+    font-size: 0.9em
+    position: absolute
+    top: -17px

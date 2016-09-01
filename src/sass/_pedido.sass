@@ -1,0 +1,376 @@
+﻿.title-plano-escolhido
+  margin-top: 20px !important
+.box-plano-escolhido
+  background: #e0e0e0
+  margin-top: 54px
+  padding: 10px 0
+  .text-plano-escolhido
+    display: block
+    font-family: $font-regular
+    font-size: 10px
+    line-height: 0.9
+  .plano-escolhido
+    color: #5f5f5f
+    display: block
+    font-family: $font-bold
+    font-size: 16px
+    line-height: 0.9
+  .valor-mensal
+    color: #5f5f5f
+    display: block
+    font-family: $font-bold
+    font-size: 14px
+    text-align: center
+    small
+      display: block
+      font-family: $font-regular
+      font-size: 10px
+      line-height: 0.5
+
+
+.header__plan
+  background-color: #e4e7e9
+  padding: 10px 0
+
+  .col__plan
+    border-left: 10px solid #00518E
+
+  .header__plan--label
+    font-size: 13px
+
+  .header__plan--title
+    color: #00518E
+    display: block
+    font-size: 15px
+    font-weight: bold
+    line-height: 1.1
+    margin: 0
+    text-transform: uppercase
+
+  .col__value
+    .header__plan--title
+      letter-spacing: -1px
+
+      span
+        font-size: 10px
+        letter-spacing: 0
+        text-transform: lowercase
+
+.title--order
+  font-size: 20px
+  font-weight: bold
+  margin-bottom: 20px
+  text-align: center
+  text-transform: uppercase
+
+.form__sms
+  text-align: center
+  .form__sms--title
+    font-size: 16px
+    font-weight: bold
+    text-align: center
+
+  .form__sms--message
+    border-bottom: 1px solid #ccc
+    font-size: 13px
+    margin-bottom: 30px
+    padding-bottom: 30px
+    text-align: center
+
+  .link__sms
+    border: 1px solid $color-border
+    border-radius: 4px
+    color: $color-border
+    display: block
+    font-weight: bold
+    margin-top: 10px
+    padding: 8px
+    text-align: center
+    &:active
+      border: 1px solid $color-default
+      color: $color-default
+    &:visited, &:focus, &:hover
+      text-decoration: none!important
+
+.form__fields--phone
+  label
+    display: block
+
+  input
+    display: inline-block
+
+    &.form__ddd
+      width: 28%
+
+    &.form__phone
+      width: calc(100% - 80px)
+
+.form--newOrder
+  position: relative
+
+  input[type=radio]
+    opacity: 0
+    position: absolute
+
+    &:checked + label
+      box-shadow: 0 1px 3px 0 rgba($color-default, 1)
+      color: #000
+    
+    &#field-sameLine:checked + label
+      box-shadow: 0 -1px 3px 0 rgba($color-default, 1)
+
+  label.form__text
+    align-items: center
+    color: $color-disabled
+    cursor: pointer
+    display: flex
+    height: 60px
+    justify-content: center
+
+  .alert
+    text-align: center
+
+  .block__sameNumber--details
+    box-shadow: 0 2px 3px 0 rgba($color-default, 1)
+    border-radius: 4px
+    background-color: #fff
+    margin: -10px 0 0
+
+    label
+      display: block
+
+    .form__text
+      display: inline-block
+      padding-bottom: 8px
+      padding-top: 8px
+
+      &.form__ddd
+        width: 25%
+
+      &.form__phone
+        width: 70%
+
+.form__address--analisys
+  align-items: center
+  background-color: #fff
+  display: flex
+  height: 100%
+  justify-content: center
+  left: 0
+  position: absolute
+  text-align: center
+  top: 0
+  width: 100%
+
+  .container__analisys
+    width: 70%
+
+    p, .form__address--analisys--title
+      font-size: 22px
+      font-weight: bold
+      margin-bottom: 20px
+      margin-top: 0
+
+    .container__analisys--progressbar
+      border: 1px solid #ccc
+      border-radius: 5px
+      margin-bottom: 20px
+      padding: 10px
+
+      .progress
+        margin-bottom: 0
+
+.form__sms--title
+  font-family: $font-bold
+  font-size: 18px
+  margin: 0 auto
+.form__sms--message
+  border-bottom: 2px solid $color-border
+  margin-bottom: 20px
+  padding-bottom: 20px
+
+.form__sms--title, .form__sms--message
+  text-align: center
+
+.box__dates
+  padding: 5px 20px
+
+  label
+    margin-right: 20px
+
+    input, span
+      vertical-align: middle
+
+//pedido recusado
+.container__refused
+  text-align: center
+
+  .col__refused
+    padding: 60px 0 0
+
+    &:before
+      background: url(../img/ico-error.svg) no-repeat center
+      content: ''
+      display: block
+      height: 110px
+
+.label__sms
+  display: block
+  text-align: center
+
+//Lista de Meus Pedidos
+.meus-pedidos
+  .title-flow
+    color: #4a4a4a
+    font-size: 1.3em
+    margin: 20px 20px 0 20px
+    text-transform: uppercase
+  .box-titulo
+    background-color: $color-background-default
+    padding-bottom: 10px
+    width: 100%
+    z-index: 9
+    position: fixed
+    top: 53px
+    left: 0
+    .box-filtra-pedido
+      margin-top: 10px
+      text-align: center
+    .filtra-pedido
+      border-bottom: 1px solid #d0021b
+      color: #d0021b
+      margin: 0 auto
+      font-family: $font-bold
+      font-size: 1.1em
+      padding-bottom: 0.2px
+      text-align: center
+      &:hover
+        text-decoration: none
+    .bl, .br
+      color: #d0021b
+      display: inline-block
+      font-family: $font-bold
+  .item-container
+    margin: 150px 0 55px 0
+    padding: 0
+    .item-list
+      margin: 0 auto
+      padding-top: 20px
+      width: 90%
+      .item-list-box
+        font-family: $font-regular
+        font-size: 0.9em
+        padding: 10px 20px
+        text-transform: initial
+        &:before
+          height: 40px
+          top: 25px
+        .item-list-top
+          border-bottom: 1px solid #c8c8c8
+          height: auto
+          margin-bottom: 5px
+          padding: 5px 0
+        strong
+          font-family: $font-bold
+          font-size: 1em
+        div
+          padding: 0
+          .comissao
+            text-align: center
+            strong
+              display: block
+        p
+          margin: 0
+
+.documento
+  label
+    display: block
+    text-align: left
+  .documento-box
+    margin-bottom: 20px
+    text-align: center
+    .img-container
+      border-top: 1px solid rgba($color-border, 0.6)
+      box-sizing: border-box
+      box-shadow: -1px 3px 4px 1px rgba($color-border, 1)
+      height: 115px
+      padding: 20px 0
+      .img__doc
+        height: 100%
+        width: auto
+    .btn-container
+      border-top: 1px solid rgba($color-border, 0.6)
+      border-left: 1px solid rgba($color-border, 0.6)
+      box-sizing: border-box
+      box-shadow: 1px 3px 4px 1px rgba($color-border, 1)
+      height: 115px
+      padding: 20px 0
+      .btn__take-photo
+        background: url('../img/ico-camera.svg') no-repeat center
+        background-size: contain
+        height: 40px
+        box-shadow: none
+        &.disabled
+          opacity: 0.3
+      .btn__discard-photo
+        background-color: transparent
+        box-shadow: none
+        color: $color-default
+        font-size: 0.65em
+        margin-top: 20px
+        &.disabled
+          color: $color-disabled
+
+.iccid
+  .barcode-capture-image
+    position: absolute
+    right: 8px
+    top: 35px
+    width: 30px
+    cursor: pointer
+  #interactive
+    background-color: #fff
+    border: 2px solid $color-border
+    border-radius: 4px
+    color:  #a7a7a7
+    margin-top: 15px
+    padding: 15px
+    position: absolute
+    z-index: 99
+    &:before
+      content: 'Leitor de código de barras'
+      display: block
+      font-family: $font-bold
+      font-size: 1.25em
+      margin-bottom: 15px
+      text-transform: uppercase
+      text-align: center
+    .viewport
+      width: 640px
+      canvas, video
+        float: left
+        width: 640px
+        .drawingBuffer
+          margin-left: -640px
+
+  @media (max-width: 603px)
+    #interactive.viewport 
+      width: 100%
+      height: auto
+      overflow: hidden
+      canvas, video
+        width: 100%
+        height: auto
+        .drawingBuffer
+          margin-left: -300px
+
+  @media (max-width: 603px)
+    #interactive.viewport
+      width: 100%
+      height: auto
+      overflow: hidden
+      canvas, video
+        width: 100%
+        height: auto
+        .drawingBuffer
+          margin-left: -300px

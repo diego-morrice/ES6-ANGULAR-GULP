@@ -1,0 +1,369 @@
+.modal-content
+  background-color: #fafafa
+  border-radius: 0
+  .modal-header
+    border: 0
+    .modal-title
+      padding-left: 10px
+      position: relative
+      &--choose-uf-ddd
+        border-bottom: 1px solid #c8c8c8
+        font-size: 1.4em
+        margin: 0 auto
+        margin-top: 20px
+        padding: 10px 25px 20px 25px
+        text-align: center
+        width: 220px
+    .close
+      border: 1px solid #777777
+      color: #777777
+      font-family: initial
+      font-weight: 900
+      line-height: 0.8
+      opacity: 1
+      padding: 2px
+  .modal-body--choose-uf-ddd
+    padding-top: 0
+    padding-bottom: 35px
+  .modal-footer
+    border: 0
+    padding: 10px 15px
+
+// Modal ~ Detalhe do Plano
+.modal-title
+  &--claro, &--vivo, &--tim
+    @extend .modal-title
+  &--claro:before, &--vivo:before, &--tim:before
+    content: ''
+    height: 70px
+    left: -15px
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    width: 10px
+  &--claro:before
+    background-color: $color-claro
+  &--vivo:before
+    background-color: $color-vivo
+  &--tim:before
+    background-color: $color-tim
+
+  &__operator, &__plan
+    color: $color-choose-op-plan
+    font-family: 'Lato-Heavy'
+    font-weight: 700
+    line-height: 15px
+    text-transform: uppercase
+  &__operator
+    font-size: 1.75em
+    margin-top: 20px
+  &__plan
+    font-size: 1.5em
+
+.modal-info-label
+  color: $color-choose-op-plan
+  font-family: 'Lato-Heavy'
+  font-size: 1.8em
+  font-weight: 700
+  position: relative
+  text-align: center
+
+  span
+    display: block
+    font-size: 13px
+    line-height: 18px
+
+  &.item--credits
+    font-size: 13px
+    line-height: 18px
+    padding: 0 30px
+
+  .modal-info-label__price
+    letter-spacing: -1px
+
+.modal-list-container
+  margin-top: 10px
+  padding: 0
+  .modal-list__item
+    line-height: 15px
+    margin-bottom: 10px
+    .modal-list__item-title
+      color: #4a4a4a
+      font-family: $font-bold
+      font-size: 1.2em
+      line-height: 1.3
+      margin: 0
+
+// Modal ~ Escolha UF e DDD
+.modal__label--block
+  display: block
+  font-size: 0.85em
+  margin: 0
+  margin-bottom: 2.5px
+
+.modal__select
+  border: 0
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4)
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4)
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4)
+  height: 35px
+  padding: 0 5px
+  width: 100%
+
+// Modal ~ TIM PRÉ
+.modal-tim-pre__title, .modal-tim-pre__title + p
+  color: $color-choose-op-plan
+  display: block
+  font-family: 'Lato-Heavy'
+  font-size: 2em
+  line-height: 30px
+  margin: 0
+  text-align: center
+  &:last-child
+    padding: 0 61.4px
+
+.modal-tim-pre-error, .modal-tim-pre-congrats
+  .modal-body-middle
+    background-position: center top 0
+    background-repeat: no-repeat
+    background-size: 100px
+    height: 201px
+    margin-top: 0
+    padding-top: 110px
+    &:before, &:after
+      display: none
+    .label__message
+      color: $color-choose-op-plan
+      font-size: 2em
+      font-weight: 700
+      line-height: 26.5px
+      margin-bottom: 0
+      padding: 0 20px
+      text-align: center
+.label__info
+  font-size: 0.9em
+  margin-top: 5px
+  text-align: center
+
+.modal-tim-pre-error .modal-body-middle
+  background-image: url('../img/ico-error.svg')
+.modal-tim-pre-congrats .modal-body-middle
+  background-image: url('../img/ico-congrats.svg')
+
+.modal-body-middle
+  box-sizing: border-box
+  height: 176px
+  margin-top: 25px
+  margin-bottom: 25px
+  padding-top: 45px
+  padding-bottom: 45px
+  position: relative
+  &:after, &:before
+    content: ''
+    width: 125%
+    height: 1px
+    background-color: $color-border
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+  &:before
+    top: 0
+  &:after
+    bottom: 0
+
+.modal-tim-pre-sms .modal-body-middle
+  padding: 10px 0
+  .modal-sms__info
+    text-align: center
+    padding: 0 58px
+    em
+      color: $color-default
+      font-weight: 700
+      font-style: normal
+  .modal-form__sms
+    display: inline-block
+    text-align: center
+    width: 235px
+  .btn__options, .btn__options:hover, .btn__options:active, .btn__options:visited
+    border: 1px solid #0db1f1
+    border-radius: 4px
+    color: #0db1f1
+    display: block
+    font-size: 1em
+    text-decoration: none
+    text-align: center
+
+.modal-tim-pre-sms .alert-danger
+  background-color: #d0021b
+  border-radius: 0
+  color: #fff
+  font-weight: 700
+  margin: 0px
+  margin-top: 20px
+  padding: 5px 0
+  text-align: center
+
+.modal-body-tim-pre
+  padding-bottom: 0
+  input
+    display: inline-block
+  .form-label__tim-pre
+    display: block
+    font-size: 1.25em
+  .modal-form__ddd
+    margin-right: 10px
+    text-align: center
+    width: 60px
+  .modal-form__num
+    width: 130px
+  .btn-success
+    display: inline-block
+    margin-left: 15px
+    height: 40px
+    width: 145px
+
+  .progress-wrapper
+    padding: 20px
+    border: 1px solid $color-border
+    border-radius: 5px
+    .progress
+      margin-bottom: 0
+
+  .progress__label
+    font-size: 1.5em
+    font-weight: 700
+    margin-top: 10px
+    text-align: center
+
+.modal-footer-tim-pre
+  padding-top: 0!important
+  text-align: left
+  color: $color-choose-op-plan
+  .tim-pre__label
+    font-family: 'Lato-Bold'
+    font-size: 1.2em
+    line-height: 19px
+    margin: 0
+    span
+      display: block
+
+  .tim-pre__info
+    color: #5b5b5b
+    line-height: 10px
+    margin: 0
+    margin-top: 2px
+
+  .tim-pre__price
+    font-family: 'Lato-Heavy'
+    font-size: 1.65em
+    text-align: center
+    margin-bottom: 0
+    &:before
+      content: 'R$ '
+  .tim-pre__price-days
+    font-weight: 700
+    margin: 0
+    margin-top: -5px
+    text-align: center
+
+.modal-detalhe-plano
+  margin-top: 10px
+  padding: 0 10px 10px 0
+  z-index: 1
+  .modal-title
+    border-left: 5px solid #d0021b
+    color: #4a4a4a
+    font-family: $font-bold
+    font-size: 1.5em
+    line-height: 1
+    max-width: 80%
+    padding: 0
+    text-transform: uppercase
+    z-index: 1
+.giga, .minutos
+  color: #4a4a4a
+  font-family: $font-bold
+  font-size: 1.5em
+  span
+    font-family: $font-regular
+    font-size: 0.7em
+    line-height: 1
+  .rede-social
+    color: #4a4a4a
+    font-family: $font-bold
+    font-size: 1.2em
+    span
+      font-size: 0.8em
+  .saldo, .lig-ilim, .sms-ilim
+    color: #4a4a4a
+    font-family: $font-bold
+    font-size: 1.2em
+    span
+      display: block
+      font-family: $font-regular
+      font-size: 0.7em
+  .modal-body div
+    line-height: 1.2
+    margin-top: 10px
+    &:first-child
+      margin-top: 0
+.modal-body
+  .row
+    margin: 0
+    .modal-info
+      padding: 0
+.valor-plano
+  border-bottom: 1px solid #e6e4e4
+  border-top: 1px solid #e6e4e4
+  color: #4a4a4a
+  font-family: $font-bold
+  font-size: 2em
+  margin-bottom: 20px
+  padding: 10px 0
+  text-align: center
+  span
+    display: block
+    font-family: $font-regular
+    font-size: 0.5em
+    margin-top: -5px
+
+//Modal Filtro Meus Pedidos
+.modal-filtro-pedidos
+  label[for="dataInicial"], label[for="dataFinal"]
+    font-size: 0.85em
+  .close
+    outline: none
+    position: relative
+    z-index: 2
+  .title-flow
+    font-size: 1.8em
+    margin: 0
+    padding-bottom: 20px
+    text-transform: none !important
+  &.modal-body--choose-uf-ddd
+    padding-bottom: 0
+  .modal-header
+    padding: 15px 15px 0 15px
+    & > div
+      padding: 0
+  fieldset > div
+    padding: 0 10px
+  fieldset > .form-group
+    clear: both
+  input
+    font-size: 1em
+    outline: none
+  ::-webkit-input-placeholder
+    color: #5d5d5d
+    font-family: $font-bold
+  ::-moz-placeholder
+    color: #5d5d5d
+    font-family: $font-bold
+  :-ms-input-placeholder
+    color: #5d5d5d
+    font-family: $font-bold
+  :-moz-placeholder
+    color: #5d5d5d
+    font-family: $font-bold
+  select.form-control
+    font-family: $font-bold

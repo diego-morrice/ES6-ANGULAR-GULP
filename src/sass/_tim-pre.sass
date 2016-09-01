@@ -1,0 +1,123 @@
+.tim-pre-banner
+  background: url('../img/background-tim.png') no-repeat center left 70px
+  background-size: cover
+  height: 245px
+  position: relative
+  width: 100%
+  &:before
+    background: url('../img/toy-super-tim.png') no-repeat center
+    background-size: contain
+    bottom: -25px
+    content: ''
+    height: 275px
+    left: 15%
+    position: absolute
+    width: 200px
+  &:after
+    background: url('../img/logo-tim-pre.svg') no-repeat center
+    background-size: 100%
+    bottom: -10px
+    content: ''
+    height: 275px
+    left: 40%
+    position: absolute
+    transform: translateX(20%)
+    width: 157px
+
+  .logo__tim-pre
+    background-color: #f4d100
+    display: inline-block
+    height: 100%
+    position: relative
+    width: 70px
+    &:after
+      content: ''
+      width: 70px
+      height: 80px
+      background: url('../img/logo-tim--small.svg') no-repeat center
+      background-size: 100%
+      position: absolute
+      left: 43px
+      top: 40px
+
+  .tim-pre-banner__info
+    color: #fff
+    font-family: 'Lato-Heavy'
+    font-size: 2.25em
+    text-transform: uppercase
+    position: absolute
+    left: 70%
+    top: 50%
+    transform: translateY(-50%)
+    width: 195px
+    line-height: 30px
+
+.tim-pre-container
+  margin-top: 30px
+
+  .tim-pre-plano
+    border-radius: 4px
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4)
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4)
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4)
+    box-sizing: border-box
+    color: $color-choose-op-plan
+    display: flex
+    justify-content: space-between
+    height: 130px
+    margin-bottom: 20px
+    padding: 10px
+
+    .tim-pre-plano-box
+      box-sizing: border-box
+      width: 19%
+      .tim-pre__name
+        font-family: 'Lato-Heavy'
+        font-size: 1.75em
+        line-height: 20px
+        margin: 0
+        & + p
+          font-size: 1.5em
+          font-weight: 700
+          margin: 0
+
+      .tim-pre__label
+        font-family: 'Lato-Bold'
+        font-size: 1.5em
+        line-height: 20px
+        margin: 0
+        padding-right: 10px
+        span
+          display: block
+
+      .tim-pre__info
+        color: #5b5b5b
+        line-height: 10px
+        margin: 0
+        margin-top: 2.5px
+        padding-right: 15px
+
+      .tim-pre__price
+        font-family: 'Lato-Heavy'
+        font-size: 1.75em
+        line-height: 35px
+        text-align: center
+        margin-bottom: 0
+        &:before
+          content: 'R$ '
+      .tim-pre__price-days
+        font-size: 1.15em
+        font-weight: 700
+        text-align: center
+
+.btn-grey, .btn-grey:active, .btn-grey:visited, .btn-grey:link, .btn-grey:focus, .btn-grey:hover
+  background-color: $color-disabled
+  color: #fff
+  font-family: 'Lato-Heavy'
+  font-size: 1.75em
+  left: 50%
+  padding: 10px 0
+  margin: 50px 0 30px 0
+  position: relative
+  transform: translateX(-50%)
+  width: 285px

@@ -1,0 +1,16 @@
+﻿@mixin boxShadow($color, $opacity)
+  -webkit-box-shadow: 0 1px 3px 0 rgba($color, $opacity)
+  -moz-box-shadow: 0 1px 3px 0 rgba($color, $opacity)
+  box-shadow: 0 1px 3px 0 rgba($color, $opacity)
+  //-webkit-appearance: none
+
+@mixin boxShadowCustomize($values, $color, $opacity)
+  -webkit-box-shadow: $values rgba($color, $opacity)
+  -moz-box-shadow: $values rgba($color, $opacity)
+  box-shadow: $values rgba($color, $opacity)
+
+@mixin border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius

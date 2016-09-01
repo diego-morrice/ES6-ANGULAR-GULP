@@ -1,0 +1,59 @@
+﻿label
+  color: #666
+  font-size: 16px
+  font-weight: normal
+
+input[type=text], input[type=password], input[type=number], .form__text
+  border: 0
+  color: 
+  font-size: 16px
+  font-weight: 700
+  padding-bottom: 20px
+  padding-top: 20px
+  box-shadow: 0 1px 3px 0 rgba(#000, .4)
+
+  &.error
+  // box-shadow: 0 1px 3px 0 rgba(#900, .75)
+
+select.form-control
+  border: 0
+  height: 40px
+  box-shadow: 0 1px 3px 0 rgba(#000, .4)
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  margin: 0
+
+.form-group
+  position: relative
+
+  div.error
+    background-color: #e00;
+    border-radius: 4px;
+    bottom: 30px;
+    color: #fff;
+    padding: 5px 10px;
+    position: absolute;
+    right: -18px;
+
+    &:before
+      border-left: 0 solid transparent;
+      border-right: 17px solid transparent;
+      border-top: 14px solid #b00;
+      bottom: -14px;
+      content: "";
+      display: inline-block;
+      height: 0;
+      right: 0;
+      position: absolute;
+      width: 0;
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn, .btn-success.active, .btn-success:active, .open>.dropdown-toggle.btn-success
+  background-color: #e1e1e1
+  box-shadow: 0 1px 3px 0 rgba(#141414, .5)
+
+.form__button
+  text-transform: uppercase
+
+.block__sameNumber--details .form__phone
+  height: 40px

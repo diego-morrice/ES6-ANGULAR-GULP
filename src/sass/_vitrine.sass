@@ -1,0 +1,118 @@
+.choose-op-plans
+  padding: 0
+  .title-fixed
+    background-color: $color-background-default
+    left: 0
+    position: fixed
+    top: 0
+    z-index: 9
+    .title-flow
+      margin-bottom: 5px
+
+.nav-tabs
+  border-width: 2px
+  &.nav-tabs.todos .todos, &.nav-tabs.controle .controle, &.nav-tabs.pos .pos
+    border: 0
+    border-bottom: 6px solid $color-default
+  &>li
+    font-weight: 700
+    text-align: center
+    text-transform: uppercase
+    width: 33%
+  &>li>a, &>li>a:focus, &>li>a:hover
+    background-color: transparent!important
+    border: 0
+    color: $color-filter
+    font-size: 15px
+    padding-left: 0
+    padding-right: 0
+  &>li.active>a, &>li.active>a:focus, &>li.active>a:hover
+    border: 0
+    border-bottom: 6px solid $color-default
+
+.container-fluid.nav-state
+  background-color: $color-background-default
+  left: 0
+  position: fixed
+  top: 100px
+  left: 0
+  width: 100%
+  z-index: 9
+  .nav-state-filter
+    line-height: 15px
+    &__btn--state, &__btn--ddd
+      font-size: 0.9em
+      margin: 0
+      text-decoration: underline
+    &__btn--state
+      background: url('../img/ico-local.svg') no-repeat center left 0
+      background-size: contain
+      padding-left: 12.5px
+    .nav-state__item
+      text-align: center
+
+.item-container
+  background-color: #fff
+  overflow-x: hidden
+.item-wrapper
+  height: auto
+  overflow-x: hidden
+.item-list
+  margin-top: 190px
+  overflow-x: hidden
+  width: 100%
+  &-box
+    border-radius: 4px
+    border: 1px solid rgba(#000, 0.2)
+    box-shadow: 0 1px 3px 0 rgba(#000, .5)
+    cursor: pointer
+    font-family: $font-bold
+    margin-bottom: 15px
+    padding: 15px 15px 25px 15px
+    position: relative
+    text-transform: uppercase
+    &:before
+      background-color: $color-default
+      content: ''
+      height: 60px
+      left: 0
+      position: absolute
+      top: 40px
+      transform: translateY(-50%)
+      width: 7.5px
+  &-top
+    border-bottom: 2px solid $color-border
+    box-sizing: border-box
+    height: 66px
+    padding-bottom: 10px
+  &-bottom
+    padding-left: 15px
+    padding-top: 15px
+  &__name, &__price
+    font-size: 1em
+    line-height: 18px
+    margin: 0
+  &__price
+    font-size: 1.5em
+    position: relative
+    text-align: center
+    &:before
+      content: 'R$ '
+    &:after
+      bottom: -20px
+      content: 'por mês'
+      font-family: $font-regular
+      font-size: 0.7em
+      left: 50%
+      position: absolute
+      transform: translateX(-50%)
+      text-transform: lowercase
+      width: 100%
+  &__internet, &__credit, &__minutes
+    font-size: 1.5em
+    & + small
+      font-family: $font-regular
+      font-size: 1em
+      margin-left: 5px
+  &__credit:before
+    content: 'R$'

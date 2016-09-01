@@ -1,0 +1,86 @@
+﻿@import 'variables'
+@import 'fonts'
+@import 'botoes'
+@import 'forms'
+@import 'modal'
+@import 'header'
+@import 'login'
+@import 'pedido'
+@import 'vitrine'
+@import 'panel'
+@import 'typography'
+@import 'parabens'
+@import 'report'
+
+body
+  background-color: $color-background-default
+  font-family: $font-regular
+  overflow-x: hidden
+  ul, ol
+    margin: 0
+    padding: 0
+  li
+    list-style: none
+  small
+    text-transform: none
+
+.clearfix:after
+  content: "."
+  display: block
+  height: 0
+  clear: both
+  visibility: hidden
+.clearfix
+  height: 100%
+
+.title-flow
+  border-bottom: 2px solid $color-border
+  font-family: $font-bold
+  font-size: 1.15em
+  margin-bottom: 20px
+  margin-top: 75px
+  padding-bottom: 3px
+  text-align: center
+  text-transform: uppercase
+  position: relative
+
+.btn__flow
+  background-color: transparent
+  background-repeat: no-repeat
+  background-position: center
+  background-size: contain
+  border: 0
+  box-sizing: border-box
+  height: 17.5px
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  width: 17.5px
+  &:disabled
+    opacity: 0.2
+#btnFlowBack
+  background-image: url('../img/ico-prev.svg')
+  left: 0
+#btnFlowFoward
+  background-image: url('../img/ico-next.svg')
+  right: 0
+
+//sppiner
+.container-spinner
+  background-color: rgba(#fff, 0.6)
+  height: 100%
+  position: fixed
+  top: 0
+  width: 100%
+  z-index: 9999
+
+  &.spinner-crivo
+    background-color: transparent
+
+    .spinner
+      display: block
+
+input.error[class*='ng-invalid']
+  -webkit-box-shadow: 0 1px 3px 0 rgba($color-default, 1)
+  -webkit-appearance: none
+  box-shadow: 0 1px 3px 0 rgba($color-default, 1)

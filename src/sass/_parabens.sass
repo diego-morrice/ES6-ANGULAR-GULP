@@ -1,0 +1,232 @@
+.congrats-header
+  margin-top: 80px
+
+  .congrats__title
+    border-bottom: 1px solid $color-border
+    font-size: 1.5em
+    font-weight: 700
+    margin-bottom: 30px
+    padding-bottom: 30px
+    text-align: center
+    p
+      margin: 0
+    strong
+      font-size: 1.25em
+      font-family: 'Lato-Heavy'
+      text-transform: uppercase
+
+  .congrats__what-happens-now
+    text-align: justify
+
+.congrats-intel
+  box-shadow: 0 1px 3px 0 rgba(#000, .4)
+  margin-top: 50px
+  padding: 0 20px 40px 20px
+  .congrats-intel__code
+    border-bottom: 2px solid $color-border
+    margin: 0 auto
+    margin-bottom: 25px
+    padding: 10px
+    text-align: center
+  .congrats-intel__index
+    margin-bottom: 0
+
+.box__congrats--timeline
+  margin: 60px auto 0
+  position: relative
+  width: 500px
+
+  ul
+    align-items: center
+    display: flex;
+    justify-content: space-between
+
+    width: 100%
+
+    &:before
+      content: ''
+      height: 8px
+      left: 0
+      margin-top: -4px
+      position: absolute
+      top: 50%
+      width: 100%
+      border-radius: 4px
+      box-shadow: 0 1px 3px 0 rgba(#000, .4)
+
+    li
+      color: #656565
+      font-family: 'Lato-Heavy';
+      font-weight: bold
+      position: relative
+      text-align: center
+
+      .header
+        margin-bottom: 50px
+
+      span
+        display: block
+
+      &:before
+        background-color: #fff
+        content: ''
+        height: 34px
+        left: 50%
+        margin: -17px 0 0 -17px
+        position: absolute
+        top: 50%
+        width: 34px
+        z-index: 1
+        border-radius: 100%
+        box-shadow: 0 1px 3px 0 rgba(#000, .4)
+
+      &:first-child
+        margin-left: -25px
+
+        .header
+          color: $color-default
+          position: relative
+
+          &:before
+            background: url('../img/certo-parabens.png') no-repeat center 0
+            content: ''
+            height: 28px
+            margin: -35px 0 0 6px
+            position: absolute
+            width: 33px
+
+        &:after
+          background-color: $color-default
+          border: 5px solid #fff
+          content: ''
+          height: 22px
+          left: 50%
+          margin: -11px 0 0 -11px
+          position: absolute
+          top: 50%
+          width: 22px
+          z-index: 3
+          border-radius: 100%
+
+        &:before
+          background-color: $color-default
+          border: 3px solid #fff
+
+      &:nth-child(2)
+        &:after
+          background-color: #fff
+          border: 3px solid $color-default
+          content: ''
+          height: 26px
+          left: 50%
+          margin: -13px 0 0 -13px
+          position: absolute
+          top: 50%
+          width: 26px
+          z-index: 3
+          border-radius: 100%
+
+        &:before
+          background-color: #fff
+          content: ''
+          height: 34px
+          left: 50%
+          margin: -17px 0 0 -17px
+          position: absolute
+          top: 50%
+          width: 34px
+          z-index: 1
+          border-radius: 100%
+          box-shadow: 0 1px 3px 0 rgba(#000, .4)
+
+      &:last-child
+        margin-right: -25px
+    
+    &:after
+      background-color: $color-default
+      content: ''
+      height: 4px
+      left: 0
+      margin-top: -2px
+      position: absolute
+      top: 50%
+      width: 32%
+      z-index: 2
+
+    &.modalidade-migracao:after
+      width: 50%
+.congrats-portability, .congrats-new-line
+  background: #f1f1f1
+  .congrats__title
+    color: #333
+    font-family: 'DIN-Regular'
+    font-size: 1.2em
+    line-height: 1.3
+    margin-bottom: 20px
+    padding-bottom: 20px
+    strong
+      font-family: 'DIN-Bold'
+      font-size: 1.2em
+    p
+      strong
+        display: block
+        font-family: 'DIN-Bold'
+        font-size: 1em
+  .texto-msg
+    font-family: 'DIN-Regular'
+    font-size: 1em
+
+  .box-dados
+    background: #fafafa
+    border: 1px solid #dbdbdb
+    margin: 15px 0 20px 0
+    padding: 20px
+    .codigo
+      border-bottom: 1px solid #c9c9c9
+      color: #515151
+      font-size: 1.5em
+      line-height: 1.3
+      margin-top: 0
+      padding-bottom: 10px
+      text-align: center
+    .box-dado:nth-child(2)
+      margin-top: 0
+    .box-dado
+      color: #636363
+      font-family: 'DIN-Bold'
+      margin-top: 10px
+    label
+      display: block
+      font-family: 'DIN-Regular'
+      margin-bottom: 0
+
+
+.andamento-pedido
+  margin: 0
+  display: block
+
+.andamento-pedido-container.portabilidade
+    position: relative
+    right: 25px
+    width: 250px
+.andamento-pedido-container
+  margin: 0 auto
+  position: relative
+  width: 210px
+  div
+    line-height: 15px
+    position: absolute
+    right: 0
+    &:nth-child(2)
+      top: 35px
+    &:nth-child(3)
+      top: 135px
+    &:nth-child(4)
+      top: 235px
+    &:before
+      content: 'Até'
+  .andamento-pedido__data
+    right: 20px
+    width: 50px
+    &:before
+      content: ''
