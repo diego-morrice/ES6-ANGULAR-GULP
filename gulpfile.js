@@ -14,7 +14,7 @@ var sass = require('gulp-sass');
 // Onde os arquivos estão localizados
 var jsFiles   = "src/js/**/*.js";
 var viewFiles = "src/js/**/*.html";
-var sassFiles = "src/sass/**/*.sass"
+var sassFiles = "src/sass/**/*.sass";
 
 var interceptErrors = function(error) {
   var args = Array.prototype.slice.call(arguments);
@@ -59,9 +59,13 @@ gulp.task('views', function() {
 
 //converte sass para css
 gulp.task('styles', function () {
+     gulp.src('src/css/bootstrap.min.css')
+        .on('error', interceptErrors)
+        .pipe(gulp.dest('./build/'));  
+
     gulp.src(sassFiles)
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./build/'));
+        .pipe(gulp.dest('./build/'));  
 });
 
 // PRODUÇÃO
