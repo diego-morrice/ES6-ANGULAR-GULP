@@ -3,14 +3,14 @@
     <div class="row">
 
       <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-xs-center" ng-bind="::$ctrl.title"></h1>
+        <h1 class="text-xs-center" ng-bind="::$ctrl.titulo"></h1>
         <p class="text-xs-center">
           <a ui-sref="app.login"
-            ng-show="$ctrl.authType === 'cadastro'">
+            ng-show="$ctrl.authTipo === 'cadastro'">
              Já possui uma conta?
           </a>
           <a ui-sref="app.cadastro"
-            ng-show="$ctrl.authType === 'login'">
+            ng-show="$ctrl.authTipo === 'login'">
             Precisa de uma conta?
           </a>
         </p>
@@ -20,7 +20,7 @@
         <form ng-submit="$ctrl.autenticar()">
           <fieldset ng-disabled="$ctrl.autenticando">
 
-            <fieldset class="form-group" ng-show="$ctrl.authType === 'register'">
+            <fieldset class="form-group" ng-show="$ctrl.authTipo === 'cadastro'">
               <input class="form-control form-control-lg"
                 type="text"
                 placeholder="Username"
@@ -43,7 +43,7 @@
 
             <button class="btn btn-lg btn-primary pull-xs-right"
               type="submit"
-              ng-bind="::$ctrl.title">
+              ng-bind="::$ctrl.titulo">
             </button>
 
           </fieldset>
