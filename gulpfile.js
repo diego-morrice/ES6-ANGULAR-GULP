@@ -81,7 +81,7 @@ gulp.task('build', ['html', 'browserify'], function() {
   return merge(html,js, css);
 });
 
-gulp.task('default', ['html', 'browserify'], function() {
+gulp.task('default', ['html', 'browserify', 'styles'], function() {
 
   browserSync.init(['./build/**/**.**'], {
     server: "./build",

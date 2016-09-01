@@ -1,0 +1,24 @@
+﻿<nav class="navbar navbar-default navbar-static-top" ng-init="header.init()">
+    <div class="navbar-header">
+        <button type="button" id="navbarCollapse" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" ng-show="header.dados.autenticado">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" ng-class="{headerUnlogged:!header.dados.autenticado}" href="/"><span>Claro</span></a>
+
+        <a class="navbar-btn__seller navbar-btn__seller--thumbnail pull-right" ng-show="header.dados.autenticado" href="/relatorio">
+            <span class="seller__name">{{header.dados.nome}}</span>
+        </a>
+    </div>
+
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li ng-if="header.pedidoAberto"><a ng-click="header.novoPedido()">Novo Pedido</a></li>
+            <li ng-if="header.cancelarPedido"><a ng-click="header.novoPedido()">Cancelar Pedido</a></li>
+            <li ng-if="header.exibeRelatorio"><a ng-click="header.relatorio()">Meus Pedidos</a></li>
+            <li><a ng-click="header.sair()">Log out</a></li>
+        </ul>
+    </div>
+</nav>
