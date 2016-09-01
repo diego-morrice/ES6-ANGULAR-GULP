@@ -9,21 +9,22 @@ var rename        = require('gulp-rename');
 var templateCache = require('gulp-angular-templatecache');
 var uglify        = require('gulp-uglify');
 var merge         = require('merge-stream');
+var sass = require('gulp-sass');
 
 // Onde os arquivos estão localizados
 var jsFiles   = "src/js/**/*.js";
 var viewFiles = "src/js/**/*.html";
+var sassFiles = "src/sass/**/*.sass"
 
 var interceptErrors = function(error) {
   var args = Array.prototype.slice.call(arguments);
-
-  // Send error to notification center with gulp-notify
+ 
   notify.onError({
     title: 'Compile Error',
     message: '<%= error.message %>'
   }).apply(this, args);
 
-  // Keep gulp from hanging on this task
+
   this.emit('end');
 };
 
@@ -34,9 +35,9 @@ gulp.task('browserify', ['views'], function() {
       .transform(ngAnnotate)
       .bundle()
       .on('error', interceptErrors)
-      //Pass desired output filename to vinyl-source-stream
+   
       .pipe(source('main.js'))
-      // Start piping stream to tasks!
+      
       .pipe(gulp.dest('./build/'));
 });
 
@@ -56,17 +57,28 @@ gulp.task('views', function() {
       .pipe(gulp.dest('./src/js/config/'));
 });
 
-// This task is used for building production ready
-// minified JS/CSS files into the dist/ folder
+//converte sass para css
+gulp.task('styles', function () {
+    gulp.src(sassFiles)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./build/'));
+});
+
+// PRODUÇÃO
+// minified JS/CSS na pasta dist
 gulp.task('build', ['html', 'browserify'], function() {
   var html = gulp.src("build/index.html")
                  .pipe(gulp.dest('./dist/'));
 
   var js = gulp.src("build/main.js")
                .pipe(uglify())
-               .pipe(gulp.dest('./dist/'));
+               .pipe(gulp.dest('./dist/'));  
 
-  return merge(html,js);
+   var css = gulp.src(sassFiles)
+                .pipe(sass().on('error', sass.logError))
+                .pipe(gulp.dest('./dist/'));             
+
+  return merge(html,js, css);
 });
 
 gulp.task('default', ['html', 'browserify'], function() {
@@ -81,6 +93,10 @@ gulp.task('default', ['html', 'browserify'], function() {
   });
 
   gulp.watch("src/index.html", ['html']);
+  gulp.watch(sassFiles, ['styles']);
   gulp.watch(viewFiles, ['views']);
   gulp.watch(jsFiles, ['browserify']);
 });
+
+
+
