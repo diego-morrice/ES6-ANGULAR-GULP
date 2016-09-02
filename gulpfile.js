@@ -97,6 +97,3 @@ gulp.task('default', ['html', 'browserify', 'styles'], function() {
   gulp.watch(viewFiles, ['views']);
   gulp.watch(jsFiles, ['browserify']);
 });
-
-
-

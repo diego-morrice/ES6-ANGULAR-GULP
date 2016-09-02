@@ -25,12 +25,13 @@ const requires = [
 //   'ngTouch', 
 //   'ngAnimate', 
 //   'angularSpinner',
-  'app.auth'
+  'app.auth',
+  'app.services'
   ];
 
 window.app = angular.module('app', requires);
 
-// angular.module('app').config(appConfig);
+angular.module('app').config(appConfig);
 
 // angular.module('app').run(appRun);
 
