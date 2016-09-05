@@ -2,8 +2,8 @@ import angular from 'angular';
 
 // Importa as configurações do app
 import constants  from './config/app.constants';
-// import appConfig  from './config/app.config';
-// import appRun     from './config/app.run';
+import appConfig  from './config/app.config';
+import appRun     from './config/app.run';
 
 //Importa as bibliotecas externas
 import 'angular-ui-router';
@@ -33,7 +33,7 @@ window.app = angular.module('app', requires);
 
 angular.module('app').config(appConfig);
 
-// angular.module('app').run(appRun);
+angular.module('app').run(appRun);
 
 angular.bootstrap(document, ['app'], {
   strictDi: true
