@@ -4,7 +4,7 @@ function authInterceptor(AppConstants, $window, $q) {
   return {    
     request: function(config) {
       if(config.url.indexOf(AppConstants.urlApiRelatorios) === -1) {
-        config.headers.Authorization = 'Bearer ' + JWT.get();
+        //config.headers.Authorization = 'Bearer ' + JWT.get();
       }
       return config;
     },

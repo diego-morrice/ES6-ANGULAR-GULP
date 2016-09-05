@@ -1,9 +1,10 @@
 class AuthCtrl {
-  constructor(Usuario, $state) {
+  //constructor(Usuario, $state) {
+    constructor($state) {
     'ngInject';
 
-    this._usuario = Usuario;
-    this._$state = $state;
+    // this._usuario = Usuario;
+    // this._$state = $state;
 
     this.titulo = $state.current.title;
     this.authTipo = $state.current.name.replace('app.', '');
@@ -11,17 +12,17 @@ class AuthCtrl {
   }
 
   autenticar() {
-    this.autenticando = true;
+    // this.autenticando = true;
 
-    this._usuario.autenticar(this.authTipo, this.formData).then(
-      (res) => {
-        this._$state.go('app.home');
-      },
-      (err) => {
-        this.errors = err.data.errors;
-        this.autenticando = false;
-      }
-    )
+    // this._usuario.autenticar(this.authTipo, this.formData).then(
+    //   (res) => {
+    //     this._$state.go('app.home');
+    //   },
+    //   (err) => {
+    //     this.errors = err.data.errors;
+    //     this.autenticando = false;
+    //   }
+    // )
   }
 }
 

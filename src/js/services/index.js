@@ -4,11 +4,11 @@ import angular from 'angular';
 let servicesModule = angular.module('app.services', []);
 
 
-import UserService from './usuario.service';
-servicesModule.service('Usuario', Usuario);
-
 import Storage from './storage.service';
 servicesModule.service('Storage', Storage);
+
+// import UserService from './usuario.service';
+// servicesModule.service('Usuario', Usuario);
 
 import Token from './token.service';
 servicesModule.service('Token', Token);
@@ -18,5 +18,6 @@ servicesModule.service('Utilidades', Utilidades);
 
 import Authentication from './auth.service';
 servicesModule.service('Authentication', Authentication);
+
 
 export default servicesModule;

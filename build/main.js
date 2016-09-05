@@ -36561,6 +36561,14 @@ var _app = require('./config/app.constants');
 
 var _app2 = _interopRequireDefault(_app);
 
+var _app3 = require('./config/app.config');
+
+var _app4 = _interopRequireDefault(_app3);
+
+var _app5 = require('./config/app.run');
+
+var _app6 = _interopRequireDefault(_app5);
+
 require('angular-ui-router');
 
 require('ngstorage');
@@ -36569,12 +36577,14 @@ require('./config/app.templates');
 
 require('./auth');
 
+require('./layout');
+
+require('./services');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //gerado pelo Gulp
 
-// import appConfig  from './config/app.config';
-// import appRun     from './config/app.run';
 
 //Importa as bibliotecas externas
 var requires = ['ui.router', 'ngStorage', 'templates',
@@ -36584,7 +36594,7 @@ var requires = ['ui.router', 'ngStorage', 'templates',
 //   'ngTouch', 
 //   'ngAnimate', 
 //   'angularSpinner',
-'app.auth'];
+'app.auth', 'app.services'];
 
 // Importa as funcionalidades do app
 
@@ -36594,15 +36604,17 @@ var requires = ['ui.router', 'ngStorage', 'templates',
 
 window.app = _angular2.default.module('app', requires);
 
-// angular.module('app').config(appConfig);
+_angular2.default.module('app').constant('AppConstants', _app2.default);
 
-// angular.module('app').run(appRun);
+_angular2.default.module('app').config(_app4.default);
+
+_angular2.default.module('app').run(_app6.default);
 
 _angular2.default.bootstrap(document, ['app'], {
   strictDi: true
 });
 
-},{"./auth":8,"./config/app.constants":9,"./config/app.templates":10,"angular":3,"angular-ui-router":1,"ngstorage":4}],6:[function(require,module,exports){
+},{"./auth":8,"./config/app.config":9,"./config/app.constants":10,"./config/app.run":11,"./config/app.templates":12,"./layout":15,"./services":17,"angular":3,"angular-ui-router":1,"ngstorage":4}],6:[function(require,module,exports){
 'use strict';
 
 AuthConfig.$inject = ["$stateProvider", "$httpProvider"];
@@ -36613,26 +36625,29 @@ function AuthConfig($stateProvider, $httpProvider) {
   'ngInject';
 
   $stateProvider.state('app.login', {
-    url: '/login',
-    controller: 'AuthCtrl as $ctrl',
+    url: '/',
+    controller: 'AuthCtrl',
+    controllerAs: '$ctrl',
     templateUrl: 'auth/auth.html',
-    title: 'Entrar',
-    resolve: {
-      auth: ["User", function auth(User) {
-        return User.ensureAuthIs(false);
-      }]
-    }
-  }).state('app.register', {
-    url: '/register',
-    controller: 'AuthCtrl as $ctrl',
-    templateUrl: 'auth/auth.html',
-    title: 'Cadastro',
-    resolve: {
-      auth: ["User", function auth(User) {
-        return User.ensureAuthIs(false);
-      }]
-    }
+    title: 'Entrar'
+    // resolve: {
+    //   auth: function(User) {
+    //     return User.ensureAuthIs(false);
+    //   }
+    //}
   });
+
+  // .state('app.register', {
+  //   url: '/register',
+  //   controller: 'AuthCtrl as $ctrl',
+  //   templateUrl: 'auth/auth.html',
+  //   title: 'Cadastro',
+  //   resolve: {
+  //     auth: function(User) {
+  //       return User.ensureAuthIs(false);
+  //     }
+  //   }
+  // });
 };
 
 exports.default = AuthConfig;
@@ -36649,14 +36664,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var AuthCtrl = function () {
-  AuthCtrl.$inject = ["Usuario", "$state"];
-  function AuthCtrl(Usuario, $state) {
+  //constructor(Usuario, $state) {
+  AuthCtrl.$inject = ["$state"];
+  function AuthCtrl($state) {
     'ngInject';
 
-    _classCallCheck(this, AuthCtrl);
+    // this._usuario = Usuario;
+    // this._$state = $state;
 
-    this._usuario = Usuario;
-    this._$state = $state;
+    _classCallCheck(this, AuthCtrl);
 
     this.titulo = $state.current.title;
     this.authTipo = $state.current.name.replace('app.', '');
@@ -36665,16 +36681,17 @@ var AuthCtrl = function () {
   _createClass(AuthCtrl, [{
     key: 'autenticar',
     value: function autenticar() {
-      var _this = this;
+      // this.autenticando = true;
 
-      this.autenticando = true;
-
-      this._usuario.autenticar(this.authTipo, this.formData).then(function (res) {
-        _this._$state.go('app.home');
-      }, function (err) {
-        _this.errors = err.data.errors;
-        _this.autenticando = false;
-      });
+      // this._usuario.autenticar(this.authTipo, this.formData).then(
+      //   (res) => {
+      //     this._$state.go('app.home');
+      //   },
+      //   (err) => {
+      //     this.errors = err.data.errors;
+      //     this.autenticando = false;
+      //   }
+      // )
     }
   }]);
 
@@ -36715,6 +36732,38 @@ exports.default = authModule;
 },{"./auth.config":6,"./auth.controller":7,"angular":3}],9:[function(require,module,exports){
 'use strict';
 
+AppConfig.$inject = ["$httpProvider", "$stateProvider", "$locationProvider", "$urlRouterProvider"];
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _auth = require('./auth.interceptor');
+
+var _auth2 = _interopRequireDefault(_auth);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function AppConfig($httpProvider, $stateProvider, $locationProvider, $urlRouterProvider) {
+  'ngInject';
+
+  $httpProvider.interceptors.push(_auth2.default);
+
+  //Removendo '#' das urls
+  $locationProvider.html5Mode(true);
+
+  $stateProvider.state('app', {
+    abstract: true,
+    templateUrl: 'layout/app-view.html'
+  });
+
+  $urlRouterProvider.otherwise('/');
+}
+
+exports.default = AppConfig;
+
+},{"./auth.interceptor":13}],10:[function(require,module,exports){
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -36746,15 +36795,496 @@ var AppConstants = {
 
 exports.default = AppConstants;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
+'use strict';
+
+AppRun.$inject = ["AppConstants", "$rootScope"];
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function AppRun(AppConstants, $rootScope) {
+  'ngInject';
+
+  //Altera o titulo da página baseado no state
+
+  $rootScope.$on('$stateChangeSuccess', function (event, toState) {
+    $rootScope.setPageTitle(toState.title);
+  });
+
+  //
+  $rootScope.setPageTitle = function (title) {
+    $rootScope.pageTitle = '';
+    if (title) {
+      $rootScope.pageTitle += title;
+      $rootScope.pageTitle += ' — ';
+    }
+    $rootScope.pageTitle += AppConstants.appName;
+  };
+}
+
+exports.default = AppRun;
+
+},{}],12:[function(require,module,exports){
 "use strict";
 
 angular.module("templates", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("auth/auth.html", "<div class=\"auth-page\">\r\n  <div class=\"container page\">\r\n    <div class=\"row\">\r\n\r\n      <div class=\"col-md-6 offset-md-3 col-xs-12\">\r\n        <h1 class=\"text-xs-center\" ng-bind=\"::$ctrl.titulo\"></h1>\r\n        <p class=\"text-xs-center\">\r\n          <a ui-sref=\"app.login\"\r\n            ng-show=\"$ctrl.authTipo === \'cadastro\'\">\r\n             Já possui uma conta?\r\n          </a>\r\n          <a ui-sref=\"app.cadastro\"\r\n            ng-show=\"$ctrl.authTipo === \'login\'\">\r\n            Precisa de uma conta?\r\n          </a>\r\n        </p>\r\n\r\n        <list-errors errors=\"$ctrl.errors\"></list-errors>\r\n\r\n        <form ng-submit=\"$ctrl.autenticar()\">\r\n          <fieldset ng-disabled=\"$ctrl.autenticando\">\r\n\r\n            <fieldset class=\"form-group\" ng-show=\"$ctrl.authTipo === \'cadastro\'\">\r\n              <input class=\"form-control form-control-lg\"\r\n                type=\"text\"\r\n                placeholder=\"Username\"\r\n                ng-model=\"$ctrl.formData.nome\" />\r\n            </fieldset>\r\n\r\n            <fieldset class=\"form-group\">\r\n              <input class=\"form-control form-control-lg\"\r\n                type=\"email\"\r\n                placeholder=\"Email\"\r\n                ng-model=\"$ctrl.formData.email\" />\r\n            </fieldset>\r\n\r\n            <fieldset class=\"form-group\">\r\n              <input class=\"form-control form-control-lg\"\r\n                type=\"password\"\r\n                placeholder=\"Password\"\r\n                ng-model=\"$ctrl.formData.password\" />\r\n            </fieldset>\r\n\r\n            <button class=\"btn btn-lg btn-primary pull-xs-right\"\r\n              type=\"submit\"\r\n              ng-bind=\"::$ctrl.titulo\">\r\n            </button>\r\n\r\n          </fieldset>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
-  $templateCache.put("layout/app-view.html", "<app-header></app-header>\n\n<div ui-view></div>\n\n<app-footer></app-footer>\n");
-  $templateCache.put("layout/footer.html", "");
+  $templateCache.put("layout/app-view.html", "<app-header></app-header>\n\n<div ui-view></div>\n");
   $templateCache.put("layout/header-order.html", "<div class=\"header__plan\" ng-click=\"order.openModalOrder(\'lg\', order.infosPlan)\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-6 col__plan\">\r\n        <span class=\"header__plan--label\">Plano escolhido</span>\r\n        <h2 class=\"title header__plan--title\">{{order.infosPlan.nomePlano}}</h2>\r\n      </div>\r\n\r\n      <div class=\"col-sm-3 col__value\" ng-class=\"{\'col-sm-offset-3\': !order.infosPedido.phone}\">\r\n        <span class=\"header__plan--label\">Valor Mensal</span>\r\n        <strong class=\"title header__plan--title\">R$ {{order.infosPlan.preco}}<span>/mês</span></strong>\r\n      </div>\r\n\r\n      <div class=\"col-sm-3 col__phone\" ng-show=\"order.infosPedido.phone\">\r\n        <span class=\"header__plan--label\">Linha do Serviço</span>\r\n        <strong class=\"title header__plan--title\"><span ng-show=\"order.infosPedido.phone != \'NOVA LINHA\'\">{{order.infosPedido.ddd}}.</span>{{order.infosPedido.phone}}</strong>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
-  $templateCache.put("layout/header.html", "<nav class=\"navbar navbar-default navbar-static-top\" ng-init=\"header.init()\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" id=\"navbarCollapse\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\" ng-show=\"header.dados.autenticado\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n\n        <a class=\"navbar-brand\" ng-class=\"{headerUnlogged:!header.dados.autenticado}\" href=\"/\"><span>Claro</span></a>\n\n        <a class=\"navbar-btn__seller navbar-btn__seller--thumbnail pull-right\" ng-show=\"header.dados.autenticado\" href=\"/relatorio\">\n            <span class=\"seller__name\">{{header.dados.nome}}</span>\n        </a>\n    </div>\n\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li ng-if=\"header.pedidoAberto\"><a ng-click=\"header.novoPedido()\">Novo Pedido</a></li>\n            <li ng-if=\"header.cancelarPedido\"><a ng-click=\"header.novoPedido()\">Cancelar Pedido</a></li>\n            <li ng-if=\"header.exibeRelatorio\"><a ng-click=\"header.relatorio()\">Meus Pedidos</a></li>\n            <li><a ng-click=\"header.sair()\">Log out</a></li>\n        </ul>\n    </div>\n</nav>\n");
+  $templateCache.put("layout/header.html", "<nav class=\"navbar navbar-default navbar-static-top\" ng-init=\"$ctrl.init()\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" id=\"navbarCollapse\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\" ng-show=\"$ctrl.dados.autenticado\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n\n        <a class=\"navbar-brand\" ng-class=\"{headerUnlogged:!$ctrl.dados.autenticado}\" href=\"/\"><span>Claro</span></a>\n\n        <a class=\"navbar-btn__seller navbar-btn__seller--thumbnail pull-right\" ng-show=\"$ctrl.dados.autenticado\" href=\"/relatorio\">\n            <span class=\"seller__name\">{{$ctrl.dados.nome}}</span>\n        </a>\n    </div>\n\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li ng-if=\"$ctrl.pedidoAberto\"><a ng-click=\"$ctrl.novoPedido()\">Novo Pedido</a></li>\n            <li ng-if=\"$ctrl.cancelarPedido\"><a ng-click=\"$ctrl.novoPedido()\">Cancelar Pedido</a></li>\n            <li ng-if=\"$ctrl.exibeRelatorio\"><a ng-click=\"$ctrl.relatorio()\">Meus Pedidos</a></li>\n            <li><a ng-click=\"$ctrl.sair()\">Log out</a></li>\n        </ul>\n    </div>\n</nav>\n");
 }]);
+
+},{}],13:[function(require,module,exports){
+'use strict';
+
+authInterceptor.$inject = ["AppConstants", "$window", "$q"];
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function authInterceptor(AppConstants, $window, $q) {
+  'ngInject';
+
+  return {
+    request: function request(config) {
+      if (config.url.indexOf(AppConstants.urlApiRelatorios) === -1) {
+        //config.headers.Authorization = 'Bearer ' + JWT.get();
+      }
+      return config;
+    },
+
+    responseError: function responseError(rejection) {
+      if (rejection.status === 401) {
+
+        $window.location.reload();
+      }
+      return $q.reject(rejection);
+    }
+  };
+}
+
+exports.default = authInterceptor;
+
+},{}],14:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var HeaderApp = function () {
+    function HeaderApp($state, Authentication, Storage) {
+        _classCallCheck(this, HeaderApp);
+
+        this._dados = {};
+        this.pedidoAberto = false;
+        this._Authentication = Authentication;
+        this._Storage = Storage;
+        this._$state = $state;
+    }
+
+    _createClass(HeaderApp, [{
+        key: 'init',
+        value: function init() {
+
+            var aut = autService.dadosAutenticacao();
+            this._dados.nome = aut.nome;
+            this._dados.autenticado = aut.autenticado;
+
+            var state = this._$state.current.name;
+            this.pedidoAberto = state === 'criar-pedido' ? false : true;
+            this.cancelarPedido = state === 'relatorio' || state === 'migracao' || state === 'portabilidade' || state === 'novaLinha' || state === 'criar-pedido' ? false : true;
+            this.exibeRelatorio = state !== 'relatorio';
+
+            var arrNovoPedido = ['relatorio', 'migracao', 'portabilidade', 'novaLinha'];
+            this.pedidoAberto = arrNovoPedido.indexOf(state) >= 0;
+        }
+    }, {
+        key: 'sair',
+        value: function sair() {
+            this._Authentication.sair();
+            this._$state.go('login');
+        }
+    }, {
+        key: 'novoPedido',
+        value: function novoPedido() {
+            this._Storage.excluir('clienteData');
+            this._Storage.excluir('manterNumero');
+            this._Storage.excluir('enderecoData');
+            this._Storage.excluir('pedido');
+            this._Storage.excluir('planoEscolhido');
+            this._Storage.excluir("crivo");
+            this._$state.go('criar-pedido');
+        }
+    }, {
+        key: 'relatorio',
+        value: function relatorio() {
+            this._$state.go('relatorio');
+        }
+    }]);
+
+    return HeaderApp;
+}();
+
+},{}],15:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+var _header = require('./header.component');
+
+var _header2 = _interopRequireDefault(_header);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var layoutModule = _angular2.default.module('app.layout', []);
+
+// Components
+
+layoutModule.component('appHeader', _header2.default);
+
+exports.default = layoutModule;
+
+},{"./header.component":14,"angular":3}],16:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Authentication = function () {
+    Authentication.$inject = ["$q", "$http", "Storage", "AppConstants", "Utilidades"];
+    function Authentication($q, $http, Storage, AppConstants, Utilidades) {
+        'ngInject';
+
+        _classCallCheck(this, Authentication);
+
+        this._$q = $q;
+        this._$http = $http;
+        this._Storage = Storage;
+        this._AppConstants = AppConstants;
+        this._Utilidades = Utilidades;
+    }
+
+    _createClass(Authentication, [{
+        key: 'sair',
+        value: function sair() {
+            this._Storage.excluir('autKey');
+            this._Storage.excluir('pedido');
+            this._Storage.excluir('planoEscolhido');
+            this._Storage.excluir('clienteData');
+            this._Storage.excluir('manterNumero');
+            this._Storage.excluir('enderecoData');
+            this._Storage.excluir('pedido');
+            this._Storage.excluir("crivo");
+        }
+    }, {
+        key: 'dadosAutenticacao',
+        value: function dadosAutenticacao() {
+            var autenticao = { autenticado: false, nome: '' };
+            var dadosAutorizacao = storageService.get('autKey');
+
+            if (dadosAutorizacao) {
+                autenticao.autenticado = dadosAutorizacao.autenticado;
+                autenticao.nome = dadosAutorizacao.usuario;
+            }
+            return autenticao;
+        }
+    }, {
+        key: 'entrar',
+        value: function entrar(dadosLogin) {
+            var _this = this;
+
+            var data = { usuario: dadosLogin.usuario, senha: dadosLogin.senha };
+            var url = this._AppConstants.urlApiAuth + "autenticar";
+            var deferred = $q.defer();
+
+            this._$http({
+                url: url,
+                method: 'POST',
+                data: data,
+                headers: { 'Content-Type': 'application/json' }
+            }).then(function (res) {
+                if (!res.data.erro && res.data.autenticado) _this._Storage.atualizar('autKey', {
+                    autenticado: true,
+                    usuario: res.data.nome,
+                    mlcid: _this._Utilidades.criptografar(dadosLogin.usuario),
+                    mlpa: _this._Utilidades.criptografar(dadosLogin.senha)
+                });else _this.sair();
+
+                deferred.resolve(_dadosAutenticacao());
+            }, function (error) {
+                _this.sair();
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        }
+    }]);
+
+    return Authentication;
+}();
+
+exports.default = Authentication;
+
+},{}],17:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+var _storage = require('./storage.service');
+
+var _storage2 = _interopRequireDefault(_storage);
+
+var _token = require('./token.service');
+
+var _token2 = _interopRequireDefault(_token);
+
+var _utilidades = require('./utilidades.service');
+
+var _utilidades2 = _interopRequireDefault(_utilidades);
+
+var _auth = require('./auth.service');
+
+var _auth2 = _interopRequireDefault(_auth);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Create the module where our functionality can attach to
+var servicesModule = _angular2.default.module('app.services', []);
+
+servicesModule.service('Storage', _storage2.default);
+
+// import UserService from './usuario.service';
+// servicesModule.service('Usuario', Usuario);
+
+servicesModule.service('Token', _token2.default);
+
+servicesModule.service('Utilidades', _utilidades2.default);
+
+servicesModule.service('Authentication', _auth2.default);
+
+exports.default = servicesModule;
+
+},{"./auth.service":16,"./storage.service":18,"./token.service":19,"./utilidades.service":20,"angular":3}],18:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Storage = function () {
+  Storage.$inject = ["$localStorage", "$sessionStorage", "tipo"];
+  function Storage($localStorage, $sessionStorage, tipo) {
+    'ngInject';
+
+    _classCallCheck(this, Storage);
+
+    this._tipo = tipo;
+    this._$localStorage = $localStorage;
+    this._$sessionStorage = $sessionStorage;
+  }
+
+  _createClass(Storage, [{
+    key: 'obter',
+    value: function obter(nome) {
+      if (this._tipo === 'session') return eval("$sessionStorage." + nome);else if (this._tipo === 'local') return eval("$localStorage." + nome);
+    }
+  }, {
+    key: 'atualizar',
+    value: function atualizar(nome, valor) {
+      if (tipo === 'session') $sessionStorage[k] = valor;else if (tipo === 'local') $localStorage[k] = valor;
+    }
+  }, {
+    key: 'excluir',
+    value: function excluir(nome) {
+      if (tipo === 'session') eval("delete $sessionStorage." + nome + ";");else if (tipo === 'local') eval("delete $localStorage." + nome + ";");
+    }
+  }]);
+
+  return Storage;
+}();
+
+exports.default = Storage;
+
+},{}],19:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Token = function () {
+    Token.$inject = ["$http", "Storage", "AppConstants"];
+    function Token($http, Storage, AppConstants) {
+        'ngInject';
+
+        _classCallCheck(this, Token);
+
+        this._$http = $http;
+        this._Storage = Storage;
+        this._AppConstants;
+    }
+
+    _createClass(Token, [{
+        key: 'gerar',
+        value: function gerar() {
+            var _this = this;
+
+            var tks = this._Storage.obter('tksDT');
+
+            if (!tks) {
+
+                var dadosRequisicao = "grant_type=password&username=" + 'cd' + "&password=" + '859fad85-eb34-4b2a-9808-00fefa5a2fba';
+
+                this._$http({
+                    url: this._AppConstants.getUrlBase + 'api/security/token',
+                    method: 'POST',
+                    data: dadosRequisicao,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).then(function (res) {
+                    _this._Storage.atualizar('tksDT', { token: response.access_token });
+                }, function (error) {
+                    //_sair();
+                });
+            }
+        }
+    }]);
+
+    return Token;
+}();
+
+exports.default = Token;
+
+},{}],20:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Utilizadades = function () {
+    function Utilizadades() {
+        _classCallCheck(this, Utilizadades);
+    }
+
+    _createClass(Utilizadades, [{
+        key: 'findElementFromArray',
+        value: function findElementFromArray(arr, propName, propValue) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i][propName] === propValue) return arr[i];
+            }return null;
+        }
+    }, {
+        key: 'formatarMinutos',
+        value: function formatarMinutos(minutos, operadora) {
+
+            if (minutos === '-' || minutos === '' || minutos == undefined) return minutos;else {
+
+                if (operadora === "claro") {
+                    if (minutos.split(' ')[0] === "R$") return '*' + minutos + ' em créditos para ligações';else {
+                        return minutos.split(' ')[0];
+                    }
+                } else if (operadora === "tim") {
+                    if (minutos.split(' ')[0] === "R$") return '*' + minutos + ' em créditos para ligações';else {
+                        return minutos.split(' ')[0];
+                    }
+                } else if (operadora === "vivo") {
+                    if (minutos.split(' ').length === 2) {
+                        if (minutos.split(' ')[0] === "R$") return '*' + minutos + ' em créditos para ligações';else return minutos.split(' ')[0];
+                    }
+
+                    return minutos.split(' ')[1];
+                } else return "-";
+            }
+        }
+    }, {
+        key: 'formatarValor',
+        value: function formatarValor(valor) {
+            if (valor == undefined || valor === '') return 0;else return parseFloat(valor).toFixed(2).replace('.', ',');
+        }
+    }, {
+        key: 'criptografar',
+        value: function criptografar(value) {
+            return value.split('').reverse().join('');
+        }
+    }, {
+        key: 'decriptografar',
+        value: function decriptografar(value) {
+            return value.split('').reverse().join('');
+        }
+    }, {
+        key: 'dddUf',
+        value: function dddUf(uf) {
+            var ufddds = {
+                "AC": "68",
+                "AL": "82",
+                "AM": "92,97",
+                "AP": "96",
+                "BA": "71,73,74,75,77",
+                "CE": "85,88",
+                "DF": "61",
+                "ES": "27,28",
+                "GO": "61,62,64",
+                "MA": "98,99",
+                "MG": "31,32,33,34,35,37,38",
+                "MS": "67",
+                "MT": "65,66,67",
+                "PA": "91,93,94",
+                "PB": "83",
+                "PE": "81,87",
+                "PI": "86,89",
+                "PR": "41,42,43,44,45,46",
+                "RJ": "21,22,24",
+                "RN": "84",
+                "RO": "69",
+                "RR": "95",
+                "RS": "51,53,54,55",
+                "SC": "47,48,49",
+                "SE": "79",
+                "SP": "11,12,13,14,15,16,17,18,19",
+                "TO": "63"
+            };
+
+            if (uf) {
+                return ufddds[uf];
+            } else {
+                return ufddds;
+            }
+        }
+    }]);
+
+    return Utilizadades;
+}();
+
+exports.default = Utilizadades;
 
 },{}]},{},[5]);

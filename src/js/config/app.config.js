@@ -13,9 +13,10 @@ function AppConfig($httpProvider, $stateProvider, $locationProvider, $urlRouterP
     abstract: true,
     templateUrl: 'layout/app-view.html',
     // resolve: {
-    //   auth: function(Usuario) {
-    //     return Usuario.autenticado();
-    //   }
+    //   auth: false
+    //   // function(Usuario) {
+    //   //   return Usuario.autenticado();
+    //   // }
     // }
   });
 

@@ -14,6 +14,8 @@ import './config/app.templates';
 
 // Importa as funcionalidades do app
 import './auth';
+import './layout';
+import './services';
 
 const requires = [
   'ui.router',
@@ -30,6 +32,8 @@ const requires = [
   ];
 
 window.app = angular.module('app', requires);
+
+angular.module('app').constant('AppConstants', constants);
 
 angular.module('app').config(appConfig);
 

@@ -41,60 +41,59 @@ export default class Usuario {
 
   sair() {
     this.atual = null;
-    this._JWT.destroy();
+    // this._JWT.destroy();
     this._$state.go(this._$state.$current, null, { reload: true });
   }
 
-  verifyAuth() {
-    let deferred = this._$q.defer();
+  // verifyAuth() {
+  //   let deferred = this._$q.defer();
 
-    // check for JWT token
-    if (!this._JWT.get()) {
-      deferred.resolve(false);
-      return deferred.promise;
-    }
+  //   // check for JWT token
+  //   if (!this._JWT.get()) {
+  //     deferred.resolve(false);
+  //     return deferred.promise;
+  //   }
 
-    if (this.current) {
-      deferred.resolve(true);
+  //   if (this.current) {
+  //     deferred.resolve(true);
 
-    } else {
-      this._$http({
-        url: this._AppConstants.api + '/user',
-        method: 'GET',
-        headers: {
-          Authorization: 'Token ' + this._JWT.get()
-        }
-      }).then(
-        (res) => {
-          this.current = res.data.user;
-          deferred.resolve(true);
-        },
+  //   } else {
+  //     this._$http({
+  //       url: this._AppConstants.api + '/user',
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: 'Token ' + this._JWT.get()
+  //       }
+  //     }).then(
+  //       (res) => {
+  //         this.current = res.data.user;
+  //         deferred.resolve(true);
+  //       },
 
-        (err) => {
-          this._JWT.destroy();
-          deferred.resolve(false);
-        }
-      )
-    }
+  //       (err) => {
+  //         this._JWT.destroy();
+  //         deferred.resolve(false);
+  //       }
+  //     )
+  //   }
 
-    return deferred.promise;
-  }
+  //   return deferred.promise;
+  // }
 
 
-  ensureAuthIs(bool) {
-    let deferred = this._$q.defer();
+  // ensureAuthIs(bool) {
+  //   let deferred = this._$q.defer();
 
-    this.verifyAuth().then((authValid) => {
-      if (authValid !== bool) {
-        this._$state.go('app.home')
-        deferred.resolve(false);
-      } else {
-        deferred.resolve(true);
-      }
+  //   this.verifyAuth().then((authValid) => {
+  //     if (authValid !== bool) {
+  //       this._$state.go('app.home')
+  //       deferred.resolve(false);
+  //     } else {
+  //       deferred.resolve(true);
+  //     }
 
-    });
+  //   });
 
-    return deferred.promise;
-  }
-
+  //   return deferred.promise;
+  // }
 }
