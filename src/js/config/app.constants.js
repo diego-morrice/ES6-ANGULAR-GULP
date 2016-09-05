@@ -20,7 +20,7 @@ const AppConstants = {
     urlApiRelatorios : '//hmg.webapidominio.celulardireto.com.br/relatorio/v1/api/Parceiro/MagazineLuiza/Pedido/Listar/PorVendedor',
     urlApiAuth : '//dev.cubo.celulardireto.com.br/api/Gestao/',
     urlApiInfoPf : '//dev.cubo.celulardireto.com.br/api/Dados/ObterDadosCPF?',
-    urlApiBucket : '//dev.cubo.celulardireto.com.br/api/Bucket/',
+    urlApiBucket : '//dev.cubo.celulardireto.com.br/api/Bucket/', 
 
 
     // ************** AMBIENTE DE HOMOLOGAÇÃO *******************
